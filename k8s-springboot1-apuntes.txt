@@ -4,3 +4,9 @@ excalidraw.com
 --crear proyectos spring boot
 https://start.spring.io/
 
+--Levantar mysql con docker compose
+--ir a ruta dockercompose
+--Ejecutar comando
+docker network create --attachable -d bridge mysql_db1_network
+docker-compose up -d
+docker-compose down

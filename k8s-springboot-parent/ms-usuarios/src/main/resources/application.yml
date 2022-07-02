@@ -1,5 +1,18 @@
 spring:
   application:
     name: ms-usuarios
+  database:
+    url: jdbc:mysql://localhost:3307/ms_usuarios
+    username: root
+    password: sasa
+    driver-class.name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database.platform: org.hibernate.dialect.MySQL8Dialect
+    generate.ddl: true
+
 server:
   port: 8001
+
+logging:
+  level:
+    org.hibernate.SQL: debug
