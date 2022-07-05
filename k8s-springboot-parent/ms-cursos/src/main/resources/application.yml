@@ -1,6 +1,23 @@
 spring:
   application:
     name: ms-cursos
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ms_cursos
+    username: postgres
+    password: sasa
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    generate.dll: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
 
 server:
   port: 8002
