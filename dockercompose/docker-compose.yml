@@ -15,10 +15,24 @@ services:
     expose:
       - '3307'
     volumes:
-      - mysql_db1_data:/var/lib/mysql  
-volumes:  
+      - mysql_db1_data:/var/lib/mysql
+  postgres_db1:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    volumes: 
+      - postgres_db1_data:/var/lib/postgresql/data
+volumes:
   mysql_db1_data:
-    driver: local  
+    driver: local
+  postgres_db1_data:
+    driver: local
 networks:
   default:
     name: mysql_db1_network
