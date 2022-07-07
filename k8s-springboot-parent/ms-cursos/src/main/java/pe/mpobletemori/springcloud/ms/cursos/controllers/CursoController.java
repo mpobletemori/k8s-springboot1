@@ -1,4 +1,4 @@
-ackage pe.mpobletemori.springcloud.ms.cursos.controllers;
+package pe.mpobletemori.springcloud.ms.cursos.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
