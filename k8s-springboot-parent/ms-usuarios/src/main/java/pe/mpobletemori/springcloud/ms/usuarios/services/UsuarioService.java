@@ -10,5 +10,6 @@ public interface UsuarioService {
         Optional<UsuarioEntity> buscarPorId(Long id);
         UsuarioEntity guardar(UsuarioEntity usuarioEntity);
         void eliminar(Long id);
+        Optional<UsuarioEntity> buscarPorEmail(String email);
 
 }

@@ -39,6 +39,11 @@ public class UsuarioController {
         if(result.hasErrors()){
             return validarParams(result);
         }
+        if(usuarioService.buscarPorEmail(usuario.getEmail()).isPresent()){
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("mensaje", "Ya existe un usuario con ese correo electronico!"));
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardar(usuario));
     }
 
@@ -51,6 +56,11 @@ public class UsuarioController {
         Optional<UsuarioEntity> usuarioOptional = usuarioService.buscarPorId(id);
         if(usuarioOptional.isPresent()){
             UsuarioEntity usuarioBD = usuarioOptional.get();
+            if(!usuarioBD.getEmail().equalsIgnoreCase(usuario.getEmail()) && usuarioService.buscarPorEmail(usuario.getEmail()).isPresent()){
+                return ResponseEntity
+                        .badRequest()
+                        .body(Map.of("mensaje", "Ya existe un usuario con ese correo electronico!"));
+            }
             usuarioBD.setNombre(usuario.getNombre());
             usuarioBD.setEmail(usuario.getEmail());
             usuarioBD.setPassword(usuario.getPassword());

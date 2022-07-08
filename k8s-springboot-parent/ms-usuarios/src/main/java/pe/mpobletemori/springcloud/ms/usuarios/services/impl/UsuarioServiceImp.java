@@ -37,4 +37,11 @@ public class UsuarioServiceImp implements UsuarioService {
     public void eliminar(Long id) {
         usuarioRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<UsuarioEntity> buscarPorEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
+
+
 }
