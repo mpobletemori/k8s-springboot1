@@ -3,11 +3,15 @@ package pe.mpobletemori.springcloud.ms.usuarios.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pe.mpobletemori.springcloud.ms.usuarios.models.entity.UsuarioEntity;
 import pe.mpobletemori.springcloud.ms.usuarios.services.UsuarioService;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -31,12 +35,19 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioEntity> crear(@RequestBody UsuarioEntity usuario){
+    public ResponseEntity<?> crear(@Valid @RequestBody UsuarioEntity usuario , BindingResult result){
+        if(result.hasErrors()){
+            return validarParams(result);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardar(usuario));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioEntity> editar(@PathVariable Long id,@RequestBody UsuarioEntity usuario){
+    public ResponseEntity<?> editar(@Valid @RequestBody UsuarioEntity usuario, BindingResult result,@PathVariable Long id){
+        if(result.hasErrors()){
+            return validarParams(result);
+        }
+
         Optional<UsuarioEntity> usuarioOptional = usuarioService.buscarPorId(id);
         if(usuarioOptional.isPresent()){
             UsuarioEntity usuarioBD = usuarioOptional.get();
@@ -46,6 +57,14 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardar(usuarioBD));
         }
         return ResponseEntity.notFound().build();
+    }
+
+    private ResponseEntity<Map<String, String>> validarParams(BindingResult result) {
+        Map<String,String> errores = new HashMap<>();
+        result.getFieldErrors().forEach(err->{
+            errores.put(err.getField(),String.format("El campo %s  %s",err.getField(),err.getDefaultMessage()));
+        });
+        return ResponseEntity.badRequest().body(errores);
     }
 
     @DeleteMapping("/{id}")

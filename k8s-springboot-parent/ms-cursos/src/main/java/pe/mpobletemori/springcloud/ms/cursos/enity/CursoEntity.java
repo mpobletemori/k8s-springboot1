@@ -1,6 +1,7 @@
 package pe.mpobletemori.springcloud.ms.cursos.enity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="cursos")
@@ -8,6 +9,8 @@ public class CursoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty
     private String nombre;
 
     public Long getId() {

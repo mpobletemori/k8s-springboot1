@@ -1,6 +1,9 @@
 package pe.mpobletemori.springcloud.ms.usuarios.models.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "usuarios")
@@ -8,9 +11,16 @@ public class UsuarioEntity {
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long id;
+
+ @NotEmpty
  private String nombre;
+
+ @NotEmpty
+ @Email
  @Column(unique = true)
  private String email;
+
+ @NotBlank
  private String password;
 
     public Long getId() {
