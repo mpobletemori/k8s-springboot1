@@ -39,7 +39,7 @@ public class UsuarioController {
         if(result.hasErrors()){
             return validarParams(result);
         }
-        if(usuarioService.buscarPorEmail(usuario.getEmail()).isPresent()){
+        if(usuarioService.existePorEmail(usuario.getEmail())){
             return ResponseEntity
                     .badRequest()
                     .body(Map.of("mensaje", "Ya existe un usuario con ese correo electronico!"));

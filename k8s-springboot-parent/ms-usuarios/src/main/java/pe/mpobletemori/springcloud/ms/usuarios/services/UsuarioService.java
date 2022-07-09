@@ -11,5 +11,7 @@ public interface UsuarioService {
         UsuarioEntity guardar(UsuarioEntity usuarioEntity);
         void eliminar(Long id);
         Optional<UsuarioEntity> buscarPorEmail(String email);
+        boolean existePorEmail(String email);
+
 
 }
