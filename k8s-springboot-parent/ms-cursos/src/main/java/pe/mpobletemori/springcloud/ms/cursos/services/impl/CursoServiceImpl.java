@@ -3,6 +3,7 @@ package pe.mpobletemori.springcloud.ms.cursos.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pe.mpobletemori.springcloud.ms.cursos.model.UsuarioBeans;
 import pe.mpobletemori.springcloud.ms.cursos.model.entity.CursoEntity;
 import pe.mpobletemori.springcloud.ms.cursos.repositories.CursoRepository;
 import pe.mpobletemori.springcloud.ms.cursos.services.CursoService;
@@ -37,5 +38,20 @@ public class CursoServiceImpl implements CursoService {
     @Override
     public void eliminar(Long id) {
         cursoRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<UsuarioBeans> asignarUsuario(UsuarioBeans usuario, Long cursoId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<UsuarioBeans> crearUsuario(UsuarioBeans usuario, Long cursoId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<UsuarioBeans> eliminarUsuario(UsuarioBeans usuario, Long cursoId) {
+        return Optional.empty();
     }
 }
