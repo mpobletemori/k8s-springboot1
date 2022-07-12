@@ -3,7 +3,7 @@ package pe.mpobletemori.springcloud.ms.cursos.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pe.mpobletemori.springcloud.ms.cursos.enity.CursoEntity;
+import pe.mpobletemori.springcloud.ms.cursos.model.entity.CursoEntity;
 import pe.mpobletemori.springcloud.ms.cursos.repositories.CursoRepository;
 import pe.mpobletemori.springcloud.ms.cursos.services.CursoService;
 

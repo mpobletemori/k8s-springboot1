@@ -1,6 +1,6 @@
 package pe.mpobletemori.springcloud.ms.cursos.services;
 
-import pe.mpobletemori.springcloud.ms.cursos.enity.CursoEntity;
+import pe.mpobletemori.springcloud.ms.cursos.model.entity.CursoEntity;
 
 import java.util.List;
 import java.util.Optional;
