@@ -3,6 +3,7 @@ package pe.mpobletemori.springcloud.ms.cursos.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pe.mpobletemori.springcloud.ms.cursos.clients.UsuarioClientRest;
 import pe.mpobletemori.springcloud.ms.cursos.model.UsuarioBeans;
 import pe.mpobletemori.springcloud.ms.cursos.model.entity.CursoEntity;
 import pe.mpobletemori.springcloud.ms.cursos.repositories.CursoRepository;
@@ -17,6 +18,9 @@ public class CursoServiceImpl implements CursoService {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private UsuarioClientRest usuarioClientRest;
 
     @Override
     public List<CursoEntity> listar() {
