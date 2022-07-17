@@ -13,6 +13,13 @@ public class CursoUsuarioEntity {
     @Column(name="usuario_id",unique = true)
     private Long usuarioId;
 
+    public CursoUsuarioEntity() {
+    }
+
+    public CursoUsuarioEntity(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
     public Long getId() {
         return id;
     }
@@ -28,6 +35,7 @@ public class CursoUsuarioEntity {
     public void setUsuarioId(Long usuarioId) {
         this.usuarioId = usuarioId;
     }
+
 
     @Override
     public boolean equals(Object obj) {

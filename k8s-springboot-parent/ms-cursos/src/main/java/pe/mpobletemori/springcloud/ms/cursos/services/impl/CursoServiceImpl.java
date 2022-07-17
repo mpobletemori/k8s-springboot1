@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pe.mpobletemori.springcloud.ms.cursos.clients.UsuarioClientRest;
 import pe.mpobletemori.springcloud.ms.cursos.model.UsuarioBeans;
 import pe.mpobletemori.springcloud.ms.cursos.model.entity.CursoEntity;
+import pe.mpobletemori.springcloud.ms.cursos.model.entity.CursoUsuarioEntity;
 import pe.mpobletemori.springcloud.ms.cursos.repositories.CursoRepository;
 import pe.mpobletemori.springcloud.ms.cursos.services.CursoService;
 
@@ -44,18 +45,48 @@ public class CursoServiceImpl implements CursoService {
         cursoRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public Optional<UsuarioBeans> asignarUsuario(UsuarioBeans usuario, Long cursoId) {
+        Optional<CursoEntity> o = cursoRepository.findById(cursoId);
+        if(o.isPresent()){
+            CursoEntity cursoEntity = o.get();
+            UsuarioBeans usuarioMS = usuarioClientRest.detalle(usuario.getId());
+            cursoEntity.addCursoUsuario(new CursoUsuarioEntity(usuarioMS.getId()));
+            cursoRepository.save(cursoEntity);
+            return Optional.of(usuario);
+        }
         return Optional.empty();
     }
 
+    @Transactional
     @Override
     public Optional<UsuarioBeans> crearUsuario(UsuarioBeans usuario, Long cursoId) {
+
+        Optional<CursoEntity> o = cursoRepository.findById(cursoId);
+        if(o.isPresent()){
+            CursoEntity cursoEntity = o.get();
+            UsuarioBeans usuarioNuevoMS = usuarioClientRest.crear(usuario);
+            cursoEntity.addCursoUsuario(new CursoUsuarioEntity(usuarioNuevoMS.getId()));
+            cursoRepository.save(cursoEntity);
+            return Optional.of(usuario);
+        }
         return Optional.empty();
     }
 
+    @Transactional
     @Override
     public Optional<UsuarioBeans> eliminarUsuario(UsuarioBeans usuario, Long cursoId) {
+
+        Optional<CursoEntity> o = cursoRepository.findById(cursoId);
+        if(o.isPresent()){
+            CursoEntity cursoEntity = o.get();
+            UsuarioBeans usuarioMS = usuarioClientRest.detalle(usuario.getId());
+            cursoEntity.removeCursoUsuario(new CursoUsuarioEntity(usuarioMS.getId()));
+            cursoRepository.save(cursoEntity);
+            return Optional.of(usuario);
+        }
         return Optional.empty();
+
     }
 }

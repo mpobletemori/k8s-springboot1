@@ -63,5 +63,11 @@ public class CursoEntity {
         this.cursoUsuarios.remove(cursoUsuarioEntity);
     }
 
+    public List<UsuarioBeans> getUsuarios() {
+        return usuarios;
+    }
 
+    public void setUsuarios(List<UsuarioBeans> usuarios) {
+        this.usuarios = usuarios;
+    }
 }
