@@ -8,6 +8,6 @@ import pe.mpobletemori.springcloud.ms.cursos.model.entity.CursoEntity;
 public interface CursoRepository extends CrudRepository<CursoEntity,Long> {
 
     @Modifying
-    @Query("delete from CursoUsuario cu where cu.usuarioId=?1")
+    @Query("delete from CursoUsuarioEntity cu where cu.usuarioId=?1")
     void eliminarCursoUsuarioPorId(Long id);
 }

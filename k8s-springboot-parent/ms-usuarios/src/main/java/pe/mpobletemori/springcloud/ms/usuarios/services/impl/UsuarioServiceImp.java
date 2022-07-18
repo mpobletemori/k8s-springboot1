@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import pe.mpobletemori.springcloud.ms.usuarios.clients.CursoClienteRest;
 import pe.mpobletemori.springcloud.ms.usuarios.models.entity.UsuarioEntity;
 import pe.mpobletemori.springcloud.ms.usuarios.repositories.UsuarioRepository;
 import pe.mpobletemori.springcloud.ms.usuarios.services.UsuarioService;
@@ -16,6 +17,9 @@ public class UsuarioServiceImp implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private CursoClienteRest cursoClienteRest;
 
     @Override
     public List<UsuarioEntity> listar() {
@@ -36,6 +40,7 @@ public class UsuarioServiceImp implements UsuarioService {
     @Override
     public void eliminar(Long id) {
         usuarioRepository.deleteById(id);
+        cursoClienteRest.eliminarCursoUsuarioPorId(id);
     }
 
     @Override
