@@ -39,6 +39,11 @@ public class UsuarioServiceImp implements UsuarioService {
     }
 
     @Override
+    public List<UsuarioEntity> listarPorIds(Iterable<Long> iterableId) {
+        return (List<UsuarioEntity>)usuarioRepository.findAllById(iterableId);
+    }
+
+    @Override
     public Optional<UsuarioEntity> buscarPorEmail(String email) {
         return usuarioRepository.buscarPorEmail(email);
     }

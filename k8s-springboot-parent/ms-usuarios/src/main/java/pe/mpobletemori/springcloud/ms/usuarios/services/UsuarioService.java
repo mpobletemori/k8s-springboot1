@@ -10,6 +10,8 @@ public interface UsuarioService {
         Optional<UsuarioEntity> buscarPorId(Long id);
         UsuarioEntity guardar(UsuarioEntity usuarioEntity);
         void eliminar(Long id);
+        List<UsuarioEntity> listarPorIds(Iterable<Long> iterableId);
+
         Optional<UsuarioEntity> buscarPorEmail(String email);
         boolean existePorEmail(String email);
 
