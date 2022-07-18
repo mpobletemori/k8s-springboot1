@@ -12,6 +12,7 @@ public interface CursoService {
     Optional<CursoEntity> buscarPorIdConUsuarios(Long id);
     CursoEntity guardar(CursoEntity cursoEntity);
     void eliminar(Long id);
+    void eliminarCursoUsuarioPorId(Long id);
 
     Optional<UsuarioBeans> asignarUsuario(UsuarioBeans usuario,Long cursoId);
     Optional<UsuarioBeans> crearUsuario(UsuarioBeans usuario,Long cursoId);
