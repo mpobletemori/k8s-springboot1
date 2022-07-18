@@ -12,6 +12,7 @@ import pe.mpobletemori.springcloud.ms.cursos.services.CursoService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @Service
@@ -31,6 +32,24 @@ public class CursoServiceImpl implements CursoService {
     @Override
     public Optional<CursoEntity> buscarPorId(Long id) {
         return cursoRepository.findById(id);
+    }
+
+    @Override
+    public Optional<CursoEntity> buscarPorIdConUsuarios(Long id) {
+        Optional<CursoEntity> o = cursoRepository.findById(id);
+
+        if(o.isPresent()){
+            CursoEntity cursoEntity = o.get();
+            if(!cursoEntity.getCursoUsuarios().isEmpty()){
+                List<Long> ids = cursoEntity.getCursoUsuarios()
+                        .stream().map(cu -> cu.getUsuarioId())
+                        .collect(Collectors.toList());
+                List<UsuarioBeans> usuarioBeans = usuarioClientRest.obtenerAlumnoPorCurso(ids);
+                cursoEntity.setUsuarios(usuarioBeans);
+            }
+            return Optional.of(cursoEntity);
+        }
+        return Optional.empty();
     }
 
     @Transactional
