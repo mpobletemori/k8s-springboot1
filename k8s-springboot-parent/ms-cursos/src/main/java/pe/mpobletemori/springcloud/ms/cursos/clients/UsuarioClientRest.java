@@ -7,7 +7,7 @@ import pe.mpobletemori.springcloud.ms.cursos.model.UsuarioBeans;
 import java.util.List;
 
 
-@FeignClient(name = "ms-usuarios",url = "localhost:8001")
+@FeignClient(name = "ms-usuarios",url = "host.docker.internal:8001")
 public interface UsuarioClientRest {
 
     @GetMapping("/{id}")

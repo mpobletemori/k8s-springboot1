@@ -18,10 +18,14 @@ docker-compose down
 java -jar <<nombre_jar.jar>>
 
 --generar imagen docker
-docker build .
+docker build -t <<nombre_imagen>>.
 
 --Comando para obtener imageId
 docker images
 
+-- Comando para detener contenedor
+docker stop <<container_id>>
+
 --Comando para correr imagen generada
 docker run -p 8001:8001 <<imageId>>
+docker run -p 8001:8001 <<imagenName>>
