@@ -18,7 +18,10 @@ docker-compose down
 java -jar <<nombre_jar.jar>>
 
 --generar imagen docker
-docker build -t <<nombre_imagen>>.
+docker build -t <<nombre_imagen>> .
+
+docker build -t <<nombre_imagen>> . -f ./Dockerfile-ms-usuarios
+docker build -t ms-usuarios . -f ./Dockerfile-ms-usuarios_final
 
 --Comando para obtener imageId
 docker images
