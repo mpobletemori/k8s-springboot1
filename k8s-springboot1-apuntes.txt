@@ -26,9 +26,53 @@ docker build -t ms-usuarios . -f ./Dockerfile-ms-usuarios_final
 --Comando para obtener imageId
 docker images
 
+--Comando para eliminar imagenes por imageId
+docker rmi <<imageId1>> <<imageId2>> ...<<imageIdN>>
+
+--Comando para eliminar todos las imagenes que no tenga contenedores creados
+docker image prune
+
 -- Comando para detener contenedor
 docker stop <<container_id>>
 
---Comando para correr imagen generada
+--Comando para iniciar un contenedor detenido
+docker start <<container_id>>
+
+--Comando para iniciar un contenedor detenido attachado (ver traza de ejecucion)
+docker start -a <<container_id>>
+
+--Comando para generar contenedor apartir de imagen generada
 docker run -p 8001:8001 <<imageId>>
 docker run -p 8001:8001 <<imagenName>>
+
+--Comando para generar contenedor apartir de imagen generada en segundo plano
+docker run -d -p 8001:8001 <<imageId>>
+
+--Comando para generar contenedor apartir de imagen generada en segundo plano y al 
+--detener que se elimine
+docker run -p 8001:8001 -d  --rm <<imageId>>
+
+--Comando para generar contenedor apartir de imagen generada en segundo plano y al 
+--detener que se elimine y este modo interactivo
+docker run -p 8001:8001 -d  --rm -it <<imageId>> /bin/sh
+
+--Comando para eliminar contenedores
+docker rm <<container_id1>> <<container_id2>> ...<<container_idN>>
+
+--Comando para eliminar todos los contenedores detenidos
+docker container prune
+
+--Comando para ver solo contenedores levantados
+docker ps
+
+--Comando para ver todos los contenedores 
+docker ps -a
+
+--Comando para attachar contenedor a terminal para ver traza en vivo
+docker attach <<container_id>>
+
+--Comando para ver logs de contenedor
+docker logs <<container_id>>
+
+--Comando para ver logs de contenedor en caliente
+docker logs -f <<container_id>>
