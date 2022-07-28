@@ -21,7 +21,7 @@ java -jar <<nombre_jar.jar>>
 docker build -t <<nombre_imagen>> .
 
 docker build -t <<nombre_imagen>> . -f ./Dockerfile-ms-usuarios
-docker build -t ms-usuarios . -f ./Dockerfile-ms-usuarios_final
+docker build -t ms-usuarios:v1 . -f ./Dockerfile-ms-usuarios_final
 
 --Comando para obtener imageId
 docker images
@@ -42,19 +42,19 @@ docker start <<container_id>>
 docker start -a <<container_id>>
 
 --Comando para generar contenedor apartir de imagen generada
-docker run -p 8001:8001 <<imageId>>
-docker run -p 8001:8001 <<imagenName>>
+docker run -p 8001:8001 --name <<container_name>> <<imageId>>
+docker run -p 8001:8001 --name <<container_name>> <<imagenName>>
 
 --Comando para generar contenedor apartir de imagen generada en segundo plano
-docker run -d -p 8001:8001 <<imageId>>
+docker run -d -p 8001:8001 --name <<container_name>> <<imageId>>
 
 --Comando para generar contenedor apartir de imagen generada en segundo plano y al 
 --detener que se elimine
-docker run -p 8001:8001 -d  --rm <<imageId>>
+docker run -p 8001:8001 -d  --rm  --name <<container_name>> <<imageId>>
 
 --Comando para generar contenedor apartir de imagen generada en segundo plano y al 
 --detener que se elimine y este modo interactivo
-docker run -p 8001:8001 -d  --rm -it <<imageId>> /bin/sh
+docker run -p 8001:8001 -d  --rm -it   --name <<container_name>> <<imageId>> /bin/sh
 
 --Comando para eliminar contenedores
 docker rm <<container_id1>> <<container_id2>> ...<<container_idN>>
@@ -76,3 +76,23 @@ docker logs <<container_id>>
 
 --Comando para ver logs de contenedor en caliente
 docker logs -f <<container_id>>
+
+--Comando para copiar archivos desde local hacia contenedor
+docker cp .\Login.java <<container_id>>:/app/Login.java
+
+--Comando para copiar archivos desde contenedor hacia local
+docker cp <<container_id>>:/app/Login.java .\Login.java
+
+--Comando copiar logs de contenedor hacia local
+docker cp 068f7ea466af:/app/logs ./logs
+
+--Comando para inspeccionar una imagen
+docker image inspect <<imageId>>
+
+--Comando para inspeccionar un contenedor
+docker container inspect <<container_id>>
+
+
+
+
+

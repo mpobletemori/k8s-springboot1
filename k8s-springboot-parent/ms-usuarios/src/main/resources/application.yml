@@ -16,3 +16,5 @@ server:
 logging:
   level:
     org.hibernate.SQL: debug
+  file:
+    path: /app/logs
