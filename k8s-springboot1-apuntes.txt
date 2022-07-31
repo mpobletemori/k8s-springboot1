@@ -116,4 +116,10 @@ docker run -d -p 5532:5432 --name postgre14 --network vnet_spring -e POSTGRES_PA
 --Ver volumenes desplegados en docker
 docker volume ls
 
- 
+---USO DE ARGUMENTOS PARA ARMAR IMAGENES DOCKER
+docker build -t ms-usuarios:v1 . -f ./Dockerfile-generic --build-arg PORT_APP=8001 --build-arg MS_NAME=ms-usuarios --build-arg JAR_NAME=ms-usuarios-0.0.1-SNAPSHOT.jar
+docker build -t ms-cursos:v1   . -f ./Dockerfile-generic --build-arg PORT_APP=8002 --build-arg MS_NAME=ms-cursos   --build-arg JAR_NAME=ms-cursos-0.0.1-SNAPSHOT.jar
+
+--USO DE VARIABLES DE ENTORNO PARA DESPLEGAR CONTENEDORES DOCKER
+docker run -p 8001:8001 -e PORT=8001 -d  --rm  --name ms-usuarios --network vnet_spring ms-usuarios:v1
+docker run -p 8002:8002 -e PORT=8002 -d  --rm  --name ms-cursos   --network vnet_spring ms-cursos:v1

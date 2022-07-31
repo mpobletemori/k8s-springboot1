@@ -24,4 +24,4 @@ logging:
     org.hibernate.SQL: debug
 
 server:
-  port: 8002
+  port: ${PORT:8002}
