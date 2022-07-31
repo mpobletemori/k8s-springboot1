@@ -19,7 +19,11 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 RUN mkdir ./logs
 COPY --from=BUILDER /app/ms-usuarios/target/ms-usuarios-0.0.1-SNAPSHOT.jar ./app.jar
-EXPOSE 8001
+#Variable de entorno
+#puerto de aplicacion
+ENV PORT 8001
+
+EXPOSE $PORT
 
 #Ejecuta comando inmutables
 #ENTRYPOINT ["java","-jar","app.jar"]

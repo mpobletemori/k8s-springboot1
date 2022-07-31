@@ -56,6 +56,10 @@ docker run -p 8001:8001 -d  --rm  --name <<container_name>> <<imageId>>
 docker run -p 8001:8001 -d  --rm  --name <<container_name>> --network <<network_name>> <<imageId>>
 docker run -p 8001:8001 -d  --rm  --name ms-usuarios --network vnet_spring ms-usuarios:v1
 docker run -p 8002:8002 -d  --rm  --name ms-cursos   --network vnet_spring ms-cursos:v1
+--Levantando con variable de entorno del puerto desde comando
+docker run -p 8001:8001 -e PORT=8001 -d  --rm  --name ms-usuarios --network vnet_spring ms-usuarios:v1
+--Levantando con variable de entorno del puerto desde archivo .env
+docker run -p 8001:8001 --env-file ./.env_ms-usuarios -d  --rm  --name ms-usuarios --network vnet_spring ms-usuarios:v1
 
 --Comando para generar contenedor apartir de imagen generada en segundo plano y al 
 --detener que se elimine y este modo interactivo
