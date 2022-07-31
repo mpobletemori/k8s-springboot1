@@ -1,0 +1,79 @@
+version: "3.4"
+services:
+  mysql:
+    #para que no se agrege un prefijo a los nombres de los contenedores
+    container_name: mysql
+    image: mysql:latest
+    ports:
+      - '3307:3307'
+    expose:
+      - '3307'
+    environment:
+      MYSQL_DATABASE: 'ms_usuarios'
+      MYSQL_USER: 'mysql_user1'
+      MYSQL_PASSWORD: 'sasa'
+      MYSQL_ROOT_PASSWORD: 'sasa'
+      MYSQL_TCP_PORT: 3307
+    volumes:
+      - data-mysql:/var/lib/mysql
+    restart: always
+    networks:
+      - vnet_spring
+  postgres14:
+    #para que no se agrege un prefijo a los nombres de los contenedores
+    container_name: postgres14
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_DB=ms_cursos
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - vnet_spring
+  ms-usuarios:
+    #para que no se agrege un prefijo a los nombres de los contenedores
+    container_name: ms-usuarios
+    image: ms-usuarios:v1
+    ports:
+      - '8001:8001'
+    expose:
+      - '8001'
+    env_file: ./.env_ms-usuarios
+    networks:
+      - vnet_spring
+    depends_on:
+      - mysql
+    restart: always
+  ms-cursos:
+    #para que no se agrege un prefijo a los nombres de los contenedores
+    container_name: ms-cursos
+    image: ms-cursos:v1
+    ports:
+      - '8002:8002'
+    expose:
+      - '8001'
+    env_file: ./.env_ms-cursos
+    networks:
+      - vnet_spring
+    depends_on:
+      - postgres14
+    restart: always
+
+volumes:
+  data-mysql:
+    #para reutilizar volume de bd existe
+    name: dockercompose_mysql_db1_data
+  data-postgres:
+    #para reutilizar volume de bd existe
+    name: dockercompose_postgres_db1_data
+
+networks:
+  vnet_spring:
+    #usar red existente
+    name: vnet_spring

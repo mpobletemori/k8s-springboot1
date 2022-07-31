@@ -136,3 +136,16 @@ docker run -p 8002:8002 -e PORT=8002
 						-e DB_USERNAME=postgres
 						-e DB_PASSWORD=postgres
  -d  --rm  --name ms-cursos   --network vnet_spring ms-cursos:v1
+ 
+ 
+--DOCKER COMPOSE
+--Levantar servicios
+docker-compose up -d
+
+--Detener y borrar servicios  
+docker-compose down
+
+--iniciar servicios
+docker-compose start
+--Detener servicios
+docker-compose stop
