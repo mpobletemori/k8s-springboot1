@@ -22,6 +22,7 @@ docker build -t <<nombre_imagen>> .
 
 docker build -t <<nombre_imagen>> . -f ./Dockerfile-ms-usuarios
 docker build -t ms-usuarios:v1 . -f ./Dockerfile-ms-usuarios_final
+docker build -t ms-cursos:v1 . -f ./Dockerfile-ms-cursos_final
 
 --Comando para obtener imageId
 docker images
@@ -51,6 +52,10 @@ docker run -d -p 8001:8001 --name <<container_name>> <<imageId>>
 --Comando para generar contenedor apartir de imagen generada en segundo plano y al 
 --detener que se elimine
 docker run -p 8001:8001 -d  --rm  --name <<container_name>> <<imageId>>
+--Incluyendo red asociada
+docker run -p 8001:8001 -d  --rm  --name <<container_name>> --network <<network_name>> <<imageId>>
+docker run -p 8001:8001 -d  --rm  --name ms-usuarios --network vnet_spring ms-usuarios:v1
+docker run -p 8002:8002 -d  --rm  --name ms-cursos   --network vnet_spring ms-cursos:v1
 
 --Comando para generar contenedor apartir de imagen generada en segundo plano y al 
 --detener que se elimine y este modo interactivo
@@ -92,7 +97,19 @@ docker image inspect <<imageId>>
 --Comando para inspeccionar un contenedor
 docker container inspect <<container_id>>
 
+--Ver lista de redes desplegadas en docker
+docker network ls
+--Crear red en docker
+docker network create <<network_net>>
+docker network create vnet_spring
+--Descargar imagen docker
+docker pull <<imagen_name>>
 
+--Levantar mysql y postgresql en docker
+docker run -d -p 3307:3306 --name mysql8    --network vnet_spring -e MYSQL_ROOT_PASSWORD=sasa -e MYSQL_DATABASE=ms_usuarios -v data-mysql8:/var/lib/mysql              mysql:8
+docker run -d -p 5532:5432 --name postgre14 --network vnet_spring -e POSTGRES_PASSWORD=sasa   -e POSTGRES_DB=ms_usuarios    -v data-postgre14:/var/lib/postgresql/data postgres:14-alpine
 
+--Ver volumenes desplegados en docker
+docker volume ls
 
-
+ 

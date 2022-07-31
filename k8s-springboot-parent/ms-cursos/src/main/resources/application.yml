@@ -2,7 +2,11 @@ spring:
   application:
     name: ms-cursos
   datasource:
-    url: jdbc:postgresql://localhost:5432/ms_cursos
+    #url: jdbc:postgresql://localhost:5432/ms_cursos
+    #En caso la DB este desplegada en red de docker
+    # cambiar "host.docker.internal" por "nombre_contenedor bd"
+    #url: jdbc:postgresql://postgre14:5432/ms_cursos
+    url: jdbc:postgresql://host.docker.internal:5432/ms_cursos
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
