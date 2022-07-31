@@ -5,9 +5,9 @@ spring:
     #En caso la DB este desplegada en red de docker
     # cambiar "host.docker.internal" por "nombre_contenedor bd"
     #url: jdbc:mysql://mysql8:3307/ms_usuarios
-    url: jdbc:mysql://host.docker.internal:3307/ms_usuarios
-    username: root
-    password: sasa
+    url: jdbc:mysql://${DB_HOST:host.docker.internal:3307}/${DB_DATABASE:ms_usuarios}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:sasa}
     driver-class.name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -21,3 +21,6 @@ logging:
     org.hibernate.SQL: debug
   file:
     path: /app/logs
+
+ms-cursos:
+  url: ${CURSOS_URL:ms-cursos:8002}

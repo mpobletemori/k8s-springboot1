@@ -121,5 +121,18 @@ docker build -t ms-usuarios:v1 . -f ./Dockerfile-generic --build-arg PORT_APP=80
 docker build -t ms-cursos:v1   . -f ./Dockerfile-generic --build-arg PORT_APP=8002 --build-arg MS_NAME=ms-cursos   --build-arg JAR_NAME=ms-cursos-0.0.1-SNAPSHOT.jar
 
 --USO DE VARIABLES DE ENTORNO PARA DESPLEGAR CONTENEDORES DOCKER
-docker run -p 8001:8001 -e PORT=8001 -d  --rm  --name ms-usuarios --network vnet_spring ms-usuarios:v1
-docker run -p 8002:8002 -e PORT=8002 -d  --rm  --name ms-cursos   --network vnet_spring ms-cursos:v1
+docker run -p 8001:8001 --env-file ./.env_ms-usuarios -d  --rm  --name ms-usuarios --network vnet_spring ms-usuarios:v1
+docker run -p 8001:8001 -e PORT=8001
+						-e DB_HOST=host.docker.internal:3307
+						-e DB_DATABASE=ms_usuarios
+						-e DB_USERNAME=root
+						-e DB_PASSWORD=sasa 
+-d  --rm  --name ms-usuarios --network vnet_spring ms-usuarios:v1
+
+docker run -p 8002:8002 --env-file ./.env_ms-cursos   -d  --rm  --name ms-cursos   --network vnet_spring ms-cursos:v1
+docker run -p 8002:8002 -e PORT=8002
+						-e DB_HOST=host.docker.internal:5432
+						-e DB_DATABASE=ms_cursos
+						-e DB_USERNAME=postgres
+						-e DB_PASSWORD=postgres
+ -d  --rm  --name ms-cursos   --network vnet_spring ms-cursos:v1
