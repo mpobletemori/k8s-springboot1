@@ -40,6 +40,14 @@ services:
     #para que no se agrege un prefijo a los nombres de los contenedores
     container_name: ms-usuarios
     image: ms-usuarios:v1
+    #Usar para generar imagen y generar contenedor si se cuenta con imagen no usar
+    build:
+      context: ./
+      dockerfile: ./Dockerfile-generic
+      args:
+        - PORT_APP=8001
+        - MS_NAME=ms-usuarios
+        - JAR_NAME=ms-usuarios-0.0.1-SNAPSHOT.jar
     ports:
       - '8001:8001'
     expose:
@@ -54,6 +62,15 @@ services:
     #para que no se agrege un prefijo a los nombres de los contenedores
     container_name: ms-cursos
     image: ms-cursos:v1
+    #Usar para generar imagen y generar contenedor si se cuenta con imagen no usar
+    build:
+      context: ./
+      dockerfile: ./Dockerfile-generic
+      args:
+        - PORT_APP=8002
+        - MS_NAME=ms-cursos
+        - JAR_NAME=ms-cursos-0.0.1-SNAPSHOT.jar
+
     ports:
       - '8002:8002'
     expose:
@@ -63,6 +80,7 @@ services:
       - vnet_spring
     depends_on:
       - postgres14
+      - ms-usuarios
     restart: always
 
 volumes:

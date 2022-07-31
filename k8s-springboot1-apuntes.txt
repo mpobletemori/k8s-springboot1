@@ -139,8 +139,14 @@ docker run -p 8002:8002 -e PORT=8002
  
  
 --DOCKER COMPOSE
+--Solo construir imagenes
+docker-compose build
+
 --Levantar servicios
 docker-compose up -d
+
+--Levantar servicios forzando generacion de imagen (en caso se haya cambiado codigo)
+docker-compose up --build -d
 
 --Detener y borrar servicios  
 docker-compose down
