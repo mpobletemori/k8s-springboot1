@@ -168,7 +168,20 @@ minikube start
 minikube stop
 
 --crear deployment de un pod por comando
-kubectl create deployment mysql8 --image=mysql:latest --port=3307
+kubectl create deployment <<deployment_name>> --image=<<image_name>> --port=<<port_internal>>
+kubectl create deployment mysql --image=mysql:latest --port=3307
+
+--crear archivo yml apartir de comando para crear deployment 
+kubectl create deployment <<deployment_name>> --image=<<image_name>> --port=<<port_internal>> --dry-run=client -o yaml > <<file_name>>.yaml
+kubectl create deployment mysql --image=mysql:latest --port=3307 --dry-run=client -o yaml > deployment-mysql.yaml
+
+--crear deployment apartir de archivo yaml (forma declarativa)
+kubectl apply -f <<ruta_y_archivo_yaml>>
+kubectl apply -f ./deployment-mysql.yaml
+
+--borrar deployment
+kubectl delete deployment <<deployment_name>>
+kubectl delete deployment mysql8
 
 --ver deployments
 kubectl get deployments
@@ -181,4 +194,6 @@ kubectl get pods
 
 --ver traza de ejecucion del pod
 kubectl logs <<pod_name>>
+
+--Deployment en forma declarativa 
 

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+#datos como valores clave valor para identificar deployment
+metadata:
+  labels:
+    app: mysql
+  #nombre de deployment
+  name: mysql
+#se detalla la especificacion del deployment
+spec:
+  #especifica la cantidad de instancias que tendrá el pod
+  replicas: 1
+  selector:
+    #indica que pod con label especifico va estar asociado
+    matchLabels:
+      #este valor debe ser igual a template.metadata.labels.app para enlazar pod a deployment
+      app: mysql
+  #Detalle de configuracion de pod
+  template:
+    metadata:
+      labels:
+        app: mysql
+    #especificacion del pod asociado a deployment
+    spec:
+      #es una lista donde se especifica los contenedores e images a usar
+      containers:
+      #identificador de imagen
+      - image: mysql:latest
+        #nombre del pod a crear
+        name: mysql
+        #detallar puertos a especificar
+        ports:
+        #puerto interno del pod
+        - containerPort: 3307
+        env:
+        - name: MYSQL_DATABASE
+          value: "ms_usuarios"
+        - name: MYSQL_USER
+          value: "mysql_user1"
+        - name: MYSQL_PASSWORD
+          value: "sasa"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "sasa"
+        - name: MYSQL_TCP_PORT
+          value: "3307"
