@@ -155,3 +155,30 @@ docker-compose down
 docker-compose start
 --Detener servicios
 docker-compose stop
+
+
+----Kubernete
+--ver status de minikube
+minikube status
+
+--iniciar minikube
+minikube start
+
+--detener minikube
+minikube stop
+
+--crear deployment de un pod por comando
+kubectl create deployment mysql8 --image=mysql:latest --port=3307
+
+--ver deployments
+kubectl get deployments
+
+--ver detalle de pod levantado
+kubectl describe pods <<pod_name>>
+
+--ver pods
+kubectl get pods
+
+--ver traza de ejecucion del pod
+kubectl logs <<pod_name>>
+
