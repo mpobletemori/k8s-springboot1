@@ -196,4 +196,26 @@ kubectl get pods
 kubectl logs <<pod_name>>
 
 --Deployment en forma declarativa 
+kubectl apply -f ./<<nombre_fichero>>.yaml
 
+--Crear servicio de tipo clusterIP para exponer bd 
+*ClusterIP=Comunicacion entre pods con ip fija.
+
+*NodePort=Comunicacion desde afuera hacia pods con ip fija y el puerto exponiendo no aplica
+  usar en caso de contar un cluster de equipos.
+  
+*LoadBalancer=Permite comunicacion desde afuera hacia los pods en caso contar con cluster de equipos 
+de la infra de kubernetes.
+--generando servicio de tipo ClusterIP para exponer BD
+kubectl expose deployment mysql --port=3307 --type=ClusterIP
+kubectl expose deployment <<service_name>> --port=<<port>> --type=<<service_type>>
+
+--Ver lista de servicios
+kubectl get services
+kubectl get svc
+
+--Ver detalle de ejecucion de servicio
+kubectl describe service <<nombre de servicio>>
+
+--Ver lista de todos los servicios de kubernete
+kubectl get all
