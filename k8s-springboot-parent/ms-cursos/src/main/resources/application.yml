@@ -6,7 +6,7 @@ spring:
     #En caso la DB este desplegada en red de docker
     # cambiar "host.docker.internal" por "nombre_contenedor bd"
     #url: jdbc:postgresql://postgre14:5432/ms_cursos
-    url: jdbc:postgresql://${DB_HOST:host.docker.internal:5432}/${DB_DATABASE:ms_cursos}
+    url: jdbc:postgresql://${DB_HOST:postgres14:5432}/${DB_DATABASE:ms_cursos}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver

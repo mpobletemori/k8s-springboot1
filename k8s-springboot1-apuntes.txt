@@ -170,6 +170,8 @@ minikube stop
 --crear deployment de un pod por comando
 kubectl create deployment <<deployment_name>> --image=<<image_name>> --port=<<port_internal>>
 kubectl create deployment mysql --image=mysql:latest --port=3307
+kubectl create deployment ms-usuarios --image=ms-usuarios:v1 --port=8001
+kubectl create deployment ms-cursos   --image=ms-cursos:v1   --port=8002
 
 --crear archivo yml apartir de comando para crear deployment 
 kubectl create deployment <<deployment_name>> --image=<<image_name>> --port=<<port_internal>> --dry-run=client -o yaml > <<file_name>>.yaml
