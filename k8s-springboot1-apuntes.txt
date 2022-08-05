@@ -209,8 +209,13 @@ kubectl apply -f ./<<nombre_fichero>>.yaml
 *LoadBalancer=Permite comunicacion desde afuera hacia los pods en caso contar con cluster de equipos 
 de la infra de kubernetes.
 --generando servicio de tipo ClusterIP para exponer BD
-kubectl expose deployment mysql --port=3307 --type=ClusterIP
+kubectl expose deployment mysql       --port=3307 --type=ClusterIP
+kubectl expose deployment ms-usuarios --port=8001 --type=LoadBalancer
+kubectl expose deployment ms-cursos   --port=8002 --type=LoadBalancer
 kubectl expose deployment <<service_name>> --port=<<port>> --type=<<service_type>>
+
+--Obtener url para acceder por el service LoadBalancer
+minikube service <<service_name>>
 
 --Ver lista de servicios
 kubectl get services
