@@ -207,6 +207,10 @@ kubectl apply -f <<ruta_y_archivo_yaml>>
 kubectl apply -f ./deployment-mysql.yaml
 kubectl apply -f ./deployment-ms_usuarios.yaml
 
+--Escalar pods en deployment
+kubectl scale deployment <<deployment_name>> --replicas=<<cantidad_replicas>>
+kubectl scale deployment ms-usuarios --replicas=3
+
 --Para desplegar una imagen propio en minukube usar comando
 minikube image load <IMAGE_NAME>
 minikube image load mpobletemori/ms-usuarios:v1
@@ -249,9 +253,14 @@ kubectl expose deployment mysql       --port=3307 --type=ClusterIP
 kubectl expose deployment ms-usuarios --port=8001 --type=LoadBalancer
 -obtener url de servicio loadbalance
 minikube service ms-usuarios --url
+
 kubectl expose deployment ms-cursos   --port=8002 --type=LoadBalancer
 -obtener url de servicio loadbalance
 minikube service ms-cursos --url
+
+--obtener yaml de services
+kubectl get service <<service_name>> -o yaml > <<service_filename>>.yaml
+kubectl get service mysql -o yaml > service-mysql.yaml
 
 --Obtener url para acceder por el service LoadBalancer
 minikube service <<service_name>>
