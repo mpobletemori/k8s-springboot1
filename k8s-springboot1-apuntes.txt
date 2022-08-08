@@ -194,6 +194,9 @@ kubectl create deployment <<deployment_name>> --image=<<image_name>> --port=<<po
 kubectl create deployment mysql --image=mysql:latest --port=3307
 kubectl create deployment ms-usuarios --image=ms-usuarios:v1 --port=8001
 kubectl create deployment ms-cursos   --image=ms-cursos:v1   --port=8002
+-Actualizar imagen de un deployment (la imagen debe tener version diferente a la desplegada)
+kubectl set image deployment <<deployment_name>> <<pod_name>>=<<imagen>>:<<tag>> 
+kubectl set image deployment ms-usuarios         ms-usuarios=mpobletemori/ms-usuarios:v1 
 
 --crear archivo yml apartir de comando para crear deployment 
 kubectl create deployment <<deployment_name>> --image=<<image_name>> --port=<<port_internal>> --dry-run=client -o yaml > <<file_name>>.yaml
@@ -244,7 +247,11 @@ de la infra de kubernetes.
 kubectl expose deployment <<service_name>> --port=<<port>> --type=<<service_type>>
 kubectl expose deployment mysql       --port=3307 --type=ClusterIP
 kubectl expose deployment ms-usuarios --port=8001 --type=LoadBalancer
+-obtener url de servicio loadbalance
+minikube service ms-usuarios --url
 kubectl expose deployment ms-cursos   --port=8002 --type=LoadBalancer
+-obtener url de servicio loadbalance
+minikube service ms-cursos --url
 
 --Obtener url para acceder por el service LoadBalancer
 minikube service <<service_name>>
