@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+#datos como valores clave valor para identificar deployment
+metadata:
+  labels:
+    app: ms-usuarios
+  #nombre de deployment
+  name: ms-usuarios
+#se detalla la especificacion del deployment
+spec:
+  #especifica la cantidad de instancias que tendrá el pod
+  replicas: 1
+  selector:
+    #indica que pod con label especifico va estar asociado
+    matchLabels:
+      #este valor debe ser igual a template.metadata.labels.app para enlazar pod a deployment
+      app: ms-usuarios
+  #Detalle de configuracion de pod
+  template:
+    metadata:
+      labels:
+        app: ms-usuarios
+    #especificacion del pod asociado a deployment
+    spec:
+      #es una lista donde se especifica los contenedores e images a usar
+      containers:
+      #identificador de imagen
+      - image: mpobletemori/ms-usuarios:v1
+        #nombre del pod a crear
+        name: ms-usuarios
+        #detallar puertos a especificar
+        ports:
+        #puerto interno del pod
+        - containerPort: 8001
+        env:
+        - name: PORT
+          value: "8001"
+        - name: DB_HOST
+          value: "mysql:3307"
+        - name: DB_DATABASE
+          value: "ms_usuarios"
+        - name: DB_USERNAME
+          value: "root"
+        - name: DB_PASSWORD
+          value: "sasa"
+        - name: CURSOS_URL
+          value: "ms-cursos:8002"
+        imagePullPolicy: Always
