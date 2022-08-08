@@ -31,7 +31,7 @@ docker images
 docker rmi <<imageId1>> <<imageId2>> ...<<imageIdN>>
 
 --Comando para eliminar todos las imagenes que no tenga contenedores creados
-docker image prune
+docker image prune -a
 
 -- Comando para detener contenedor
 docker stop <<container_id>>
@@ -155,6 +155,28 @@ docker-compose down
 docker-compose start
 --Detener servicios
 docker-compose stop
+
+
+--Login en docker hub
+docker login (pedirá usuario y pwd)
+
+--Cerrar sesion en docker hub
+docker logout
+
+--Subir imagenes docker propios (requiere login)
+-crear tag de imagenes a subir a docker hub
+docker tag local-image:tagname new-repo:tagname
+docker tag ms-usuarios:v1      mpobletemori/ms-usuarios:v1
+docker tag ms-cursos:v1        mpobletemori/ms-cursos:v1
+-Subir imagenes a docker hub
+docker push new-repo:tagname
+docker push mpobletemori/ms-usuarios:v1
+docker push mpobletemori/ms-cursos:v1
+
+--Bajar imagenes de docker hub con cuenta propia (no requiere login)
+docker pull  <<image_name>>:<<tag>>
+docker pull mpobletemori/ms-usuarios:v1
+docker pull mpobletemori/ms-cursos:v1
 
 
 ----Kubernete
