@@ -189,6 +189,10 @@ minikube start
 --detener minikube
 minikube stop
 
+--Documentacion de deployments
+https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#deployment-v1-apps
+https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+
 --crear deployment de un pod por comando
 kubectl create deployment <<deployment_name>> --image=<<image_name>> --port=<<port_internal>>
 kubectl create deployment mysql --image=mysql:latest --port=3307
@@ -261,6 +265,7 @@ minikube service ms-cursos --url
 --obtener yaml de services
 kubectl get service <<service_name>> -o yaml > <<service_filename>>.yaml
 kubectl get service mysql -o yaml > service-mysql.yaml
+kubectl get service ms-usuarios -o yaml > service-ms_usuarios.yaml
 
 --Obtener url para acceder por el service LoadBalancer
 minikube service <<service_name>>

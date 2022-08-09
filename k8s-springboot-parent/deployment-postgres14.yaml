@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+#datos como valores clave valor para identificar deployment
+metadata:
+  labels:
+    app: postgres14
+  #nombre de deployment
+  name: postgres14
+#se detalla la especificacion del deployment
+spec:
+  #especifica la cantidad de instancias que tendrá el pod
+  replicas: 1
+  selector:
+    #indica que pod con label especifico va estar asociado
+    matchLabels:
+      #este valor debe ser igual a template.metadata.labels.app para enlazar pod a deployment
+      app: postgres14
+  #Detalle de configuracion de pod
+  template:
+    metadata:
+      labels:
+        app: postgres14
+    #especificacion del pod asociado a deployment
+    spec:
+      #es una lista donde se especifica los contenedores e images a usar
+      containers:
+      #identificador de imagen
+      - image: postgres:14.1-alpine
+        #nombre del pod a crear
+        name: postgres14
+        #detallar puertos a especificar
+        ports:
+        #puerto interno del pod
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: "ms_cursos"
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"

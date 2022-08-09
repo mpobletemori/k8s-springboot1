@@ -74,7 +74,7 @@ services:
     ports:
       - '8002:8002'
     expose:
-      - '8001'
+      - '8002'
     env_file: ./.env_ms-cursos
     networks:
       - vnet_spring
