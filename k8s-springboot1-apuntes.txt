@@ -287,10 +287,64 @@ kubectl get sc
 kubectl get pv 
 
 --aplicar persistentVolumen 
-kubectl apply ./persistencevolume-mysql.yaml
+kubectl apply -f ./persistentvolume-mysql.yaml
 
 --Ver lista de persistentVolumen 
 kubectl get pvc
 
 --aplicar persistentVolumenClaim 
-kubectl apply ./persistencevolumeclaim-mysql.yaml
+kubectl apply -f ./persistentvolumeclaim-mysql.yaml
+
+===========================================================
+--PASOS PARA DESPLEGAR ENTORNO KUBERNETE
+===========================================================
+1.1.-Desplegar mysql
+1.1.1.-Desplegar persistentvolume
+kubectl apply -f ./persistentvolume-mysql.yaml
+1.1.2.-Desplegar persistentvolumeclaim
+kubectl apply -f ./persistentvolumeclaim-mysql.yaml
+1.1.3.-Desplegar deployment
+kubectl apply -f ./deployment-mysql.yaml
+1.1.4.-Desplegar service clusterIP
+kubectl apply -f ./service-mysql.yaml
+
+1.2.-Desplegar postgre14
+1.2.1.-Desplegar persistentvolume
+kubectl apply -f ./persistentvolume-postgres14.yaml
+1.2.2.-Desplegar persistentvolumeclaim
+kubectl apply -f ./persistentvolumeclaim-postgres14.yaml
+1.2.3.-Desplegar deployment
+kubectl apply -f ./deployment-postgres14.yaml
+1.2.4.-Desplegar service clusterIP
+kubectl apply -f ./service-postgres14.yaml
+
+1.3.-Desplegar ms-usuarios
+1.3.1.-Desplegar deployment
+kubectl apply -f ./deployment-ms_usuarios.yaml
+1.3.2.-Desplegar service loadbalance
+kubectl apply -f ./service-ms_usuarios.yaml
+
+1.4.-Desplegar ms-cursos
+1.4.1.-Desplegar deployment
+kubectl apply -f ./deployment-ms_cursos.yaml
+1.4.2.-Desplegar service loadbalance
+kubectl apply -f ./service-ms_cursos.yaml
+
+
+===========================================================
+--PASOS PARA BORRAR DESPLIEGUE KUBERNETE
+===========================================================
+2.0.-Bajar ms-cursos
+kubectl delete -f ./service-ms_cursos.yaml -f ./deployment-ms_cursos.yaml
+
+2.1.-Bajar ms-cursos
+kubectl delete -f ./service-ms_usuarios.yaml -f ./deployment-ms_usuarios.yaml
+
+2.3.-Bajar mysql
+kubectl delete -f ./service-mysql.yaml -f ./deployment-mysql.yaml -f ./persistentvolumeclaim-mysql.yaml -f ./persistentvolume-mysql.yaml
+
+2.4.-Bajar postgres14
+kubectl delete -f ./service-postgres14.yaml -f ./deployment-postgres14.yaml -f ./persistentvolumeclaim-postgres14.yaml -f ./persistentvolume-postgres14.yaml
+
+
+
