@@ -39,3 +39,16 @@ spec:
           value: "postgres"
         - name: POSTGRES_PASSWORD
           value: "postgres"
+        #Configura uso de volumenes en contenedores
+        volumeMounts:
+          #Nombre de volumen a usar
+          - name: data-postgres
+            #Ruta en el pod donde estara alojado los registros
+            mountPath: "/var/lib/postgresql/data"
+        #Creando volumen en el equipo fisico o worker node
+      volumes:
+        - name: data-postgres
+          hostPath:
+            path: "/var/lib/postgresql/data"
+            #Indica que en caso no exista volumen lo cree caso contrario lo use
+            type: "DirectoryOrCreate"
