@@ -48,7 +48,12 @@ spec:
         #Creando volumen en el equipo fisico o worker node
       volumes:
         - name: data-postgres
-          hostPath:
-            path: "/var/lib/postgresql/data"
+          #Caso se quiera definir volume desde pod
+          #hostPath:
+            #path: "/var/lib/postgresql/data"
             #Indica que en caso no exista volumen lo cree caso contrario lo use
-            type: "DirectoryOrCreate"
+            #type: "DirectoryOrCreate"
+          #En caso usar un persistentVolumeClaim para que el volumen sea independiente del pod
+          persistentVolumeClaim:
+            #nombre de persistentVolumeClaim para asociar
+            claimName: postgres14-pvc
