@@ -43,3 +43,16 @@ spec:
           value: "sasa"
         - name: MYSQL_TCP_PORT
           value: "3307"
+        #Configura uso de volumenes en contenedores
+        volumeMounts:
+          #Nombre de volumen a usar
+          - name: data-mysql
+            #Ruta en el pod donde estara alojado los registros
+            mountPath: "/var/lib/mysql"
+        #Creando volumen en el equipo fisico o worker node
+      volumes:
+        - name: data-mysql
+          hostPath:
+            path: "/var/lib/mysql"
+            #Indica que en caso no exista volumen lo cree caso contrario lo use
+            type: "DirectoryOrCreate"
