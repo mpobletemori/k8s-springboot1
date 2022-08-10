@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  #Nombre del metadata de persistenceVolume
+  volumeName: mysql-pv
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      #Debe ser menor o igual a persistenceVolume
+      storage: 1Gi

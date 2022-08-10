@@ -279,3 +279,18 @@ kubectl describe service <<nombre de servicio>>
 
 --Ver lista de todos los servicios de kubernete
 kubectl get all
+
+--Ver lista de storage en kubernete
+kubectl get sc
+
+--Ver lista de persistentVolumen 
+kubectl get pv 
+
+--aplicar persistentVolumen 
+kubectl apply ./persistencevolume-mysql.yaml
+
+--Ver lista de persistentVolumen 
+kubectl get pvc
+
+--aplicar persistentVolumenClaim 
+kubectl apply ./persistencevolumeclaim-mysql.yaml
