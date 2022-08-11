@@ -346,5 +346,15 @@ kubectl delete -f ./service-mysql.yaml -f ./deployment-mysql.yaml -f ./persisten
 2.4.-Bajar postgres14
 kubectl delete -f ./service-postgres14.yaml -f ./deployment-postgres14.yaml -f ./persistentvolumeclaim-postgres14.yaml -f ./persistentvolume-postgres14.yaml
 
+===========================================================
+--CONFIG MAP
+===========================================================
+
+--Aplicar configmap 
+kubectl apply -f ./configmap.yaml
+
+--Ver lista de configmap
+kubectl get configmap
+
 
 
