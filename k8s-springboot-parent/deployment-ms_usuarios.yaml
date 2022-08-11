@@ -34,15 +34,63 @@ spec:
         - containerPort: 8001
         env:
         - name: PORT
-          value: "8001"
+          #seteo de variable en deployment
+          #value: "8001"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: port
+
         - name: DB_HOST
-          value: "mysql:3307"
+          #seteo de variable en deployment
+          #value: "mysql:3307"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: db_host
+
         - name: DB_DATABASE
-          value: "ms_usuarios"
+          #seteo de variable en deployment
+          #value: "ms_usuarios"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: db_database
+
         - name: DB_USERNAME
-          value: "root"
+          #seteo de variable en deployment
+          #value: "root"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: db_username
+
         - name: DB_PASSWORD
-          value: "sasa"
+          #seteo de variable en deployment
+          #value: "sasa"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: db_password
+
         - name: CURSOS_URL
-          value: "ms-cursos:8002"
+          #seteo de variable en deployment
+          #value: "ms-cursos:8002"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: cursos_url
+
         imagePullPolicy: Always

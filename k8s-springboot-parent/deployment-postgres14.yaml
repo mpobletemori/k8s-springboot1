@@ -34,11 +34,35 @@ spec:
         - containerPort: 5432
         env:
         - name: POSTGRES_DB
-          value: "ms_cursos"
+          #seteo de variable en deployment
+          #value: "ms_cursos"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-cursos
+              key: db_database
+
         - name: POSTGRES_USER
-          value: "postgres"
+          #seteo de variable en deployment
+          #value: "postgres"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-cursos
+              key: db_username
+
         - name: POSTGRES_PASSWORD
-          value: "postgres"
+          #seteo de variable en deployment
+          #value: "postgres"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-cursos
+              key: db_password
+
         #Configura uso de volumenes en contenedores
         volumeMounts:
           #Nombre de volumen a usar
@@ -53,6 +77,7 @@ spec:
             #path: "/var/lib/postgresql/data"
             #Indica que en caso no exista volumen lo cree caso contrario lo use
             #type: "DirectoryOrCreate"
+
           #En caso usar un persistentVolumeClaim para que el volumen sea independiente del pod
           persistentVolumeClaim:
             #nombre de persistentVolumeClaim para asociar

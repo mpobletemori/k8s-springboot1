@@ -34,13 +34,38 @@ spec:
         - containerPort: 3307
         env:
         - name: MYSQL_DATABASE
-          value: "ms_usuarios"
+          #seteo de variable en deployment
+          #value: "ms_usuarios"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: db_database
+
         - name: MYSQL_USER
           value: "mysql_user1"
+
         - name: MYSQL_PASSWORD
-          value: "sasa"
+          #seteo de variable en deployment
+          #value: "sasa"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: db_password
+
         - name: MYSQL_ROOT_PASSWORD
-          value: "sasa"
+          #seteo de variable en deployment
+          #value: "sasa"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: db_password
+
         - name: MYSQL_TCP_PORT
           value: "3307"
         #Configura uso de volumenes en contenedores

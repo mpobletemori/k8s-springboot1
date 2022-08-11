@@ -34,15 +34,63 @@ spec:
         - containerPort: 8002
         env:
         - name: PORT
-          value: "8002"
+          #seteo de variable en deployment
+          #value: "8002"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-cursos
+              key: port
+
         - name: DB_HOST
-          value: "postgres14:5432"
+          #seteo de variable en deployment
+          #value: "postgres14:5432"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-cursos
+              key: db_host
+
         - name: DB_DATABASE
-          value: "ms_cursos"
+          #seteo de variable en deployment
+          #value: "ms_cursos"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-cursos
+              key: db_database
+
         - name: DB_USERNAME
-          value: "postgres"
+          #seteo de variable en deployment
+          #value: "postgres"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-cursos
+              key: db_username
+
         - name: DB_PASSWORD
-          value: "postgres"
+          #seteo de variable en deployment
+          #value: "postgres"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-cursos
+              key: db_password
+
         - name: USUARIOS_URL
-          value: "ms-usuarios:8001"
+          #seteo de variable en deployment
+          #value: "ms-usuarios:8001"
+
+          #seteo de variables desde configmap
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-cursos
+              key: usuarios_url
+
         imagePullPolicy: Always
