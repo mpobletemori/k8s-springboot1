@@ -67,21 +67,31 @@ spec:
           #seteo de variable en deployment
           #value: "root"
 
-          #seteo de variables desde configmap
           valueFrom:
-            configMapKeyRef:
-              name: configmap-ms-usuarios
+            #seteo de variables desde configmap
+            #configMapKeyRef:
+              #name: configmap-ms-usuarios
+              #key: db_username
+
+            #seteo de variables desde secret
+            secretKeyRef:
+              name: secret-ms-usuarios
               key: db_username
 
         - name: DB_PASSWORD
           #seteo de variable en deployment
           #value: "sasa"
 
-          #seteo de variables desde configmap
           valueFrom:
-            configMapKeyRef:
-              name: configmap-ms-usuarios
-              key: db_password
+            #seteo de variables desde configmap
+            #configMapKeyRef:
+              #name: configmap-ms-usuarios
+              #key: db_password
+
+            #seteo de variables desde secret
+            secretKeyRef:
+               name: secret-ms-usuarios
+               key: db_password
 
         - name: CURSOS_URL
           #seteo de variable en deployment

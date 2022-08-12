@@ -67,20 +67,30 @@ spec:
           #seteo de variable en deployment
           #value: "postgres"
 
-          #seteo de variables desde configmap
           valueFrom:
-            configMapKeyRef:
-              name: configmap-ms-cursos
+            #seteo de variables desde configmap
+            #configMapKeyRef:
+              #name: configmap-ms-cursos
+              #key: db_username
+
+            #seteo de variables desde secret
+            secretKeyRef:
+              name: secret-ms-cursos
               key: db_username
 
         - name: DB_PASSWORD
           #seteo de variable en deployment
           #value: "postgres"
 
-          #seteo de variables desde configmap
           valueFrom:
-            configMapKeyRef:
-              name: configmap-ms-cursos
+            #seteo de variables desde configmap
+            #configMapKeyRef:
+              #name: configmap-ms-cursos
+              #key: db_password
+
+            #seteo de variables desde secret
+            secretKeyRef:
+              name: secret-ms-cursos
               key: db_password
 
         - name: USUARIOS_URL

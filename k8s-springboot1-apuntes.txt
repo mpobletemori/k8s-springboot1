@@ -356,5 +356,13 @@ kubectl apply -f ./configmap.yaml
 --Ver lista de configmap
 kubectl get configmap
 
+===========================================================
+--SECRETS
+===========================================================
+--Aplicar secrets
+kubectl apply -f ./secrets.yaml
+
+--Ver lista de configmap
+kubectl get secret
 
 
