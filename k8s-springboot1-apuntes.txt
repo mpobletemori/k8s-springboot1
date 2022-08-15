@@ -323,12 +323,16 @@ kubectl apply -f ./service-postgres14.yaml
 kubectl apply -f ./deployment-ms_usuarios.yaml
 1.3.2.-Desplegar service loadbalance
 kubectl apply -f ./service-ms_usuarios.yaml
+1.3.3.-Desplegar el service y pod en una linea
+kubectl apply -f ./deployment-ms_usuarios.yaml -f ./service-ms_usuarios.yaml
 
 1.4.-Desplegar ms-cursos
 1.4.1.-Desplegar deployment
 kubectl apply -f ./deployment-ms_cursos.yaml
 1.4.2.-Desplegar service loadbalance
 kubectl apply -f ./service-ms_cursos.yaml
+1.4.3-Desplegar el service y pod en una linea
+kubectl apply -f ./deployment-ms_cursos.yaml -f ./service-ms_cursos.yaml 
 
 
 ===========================================================
@@ -365,4 +369,9 @@ kubectl apply -f ./secrets.yaml
 --Ver lista de configmap
 kubectl get secret
 
-
+===========================================================
+--SPRING CLOUD KUBERNETE
+===========================================================
+--Habilitar autorizacion de administrador paa que los microservicios
+--Tengan a acceso al entorno de kubernete
+kubectl create clusterrolebinding admin --clusterrole=cluster-admin --serviceaccount=default:default

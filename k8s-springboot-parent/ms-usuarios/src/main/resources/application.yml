@@ -13,6 +13,15 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
 
+  cloud:
+    kubernetes:
+      secrets:
+        #Habilitar uso de secrets en kubernetes
+        enable-api: true
+      discovery:
+        #realizar autodescubrimiento para todos los namespace en kubernete (por defecto lo realiza en man
+        all-namespaces: true
+
 server:
   port: ${PORT:8001}
 

@@ -6,8 +6,9 @@ import pe.mpobletemori.springcloud.ms.cursos.model.UsuarioBeans;
 
 import java.util.List;
 
-
-@FeignClient(name = "ms-usuarios",url = "${ms-usuarios.url}")
+//@FeignClient(name = "ms-usuarios",url = "${ms-usuarios.url}")
+//Al usar spring cloud kubernete no se requiere url lo obtendra por el nombre de microservicio
+@FeignClient(name = "ms-usuarios")
 public interface UsuarioClientRest {
 
     @GetMapping("/{id}")

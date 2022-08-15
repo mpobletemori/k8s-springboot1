@@ -18,6 +18,14 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+  cloud:
+    kubernetes:
+      secrets:
+        #Habilitar uso de secrets en kubernetes
+        enable-api: true
+      discovery:
+        #realizar autodescubrimiento para todos los namespace en kubernete (por defecto lo realiza en man
+        all-namespaces: true
 
 logging:
   level:
