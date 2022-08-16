@@ -215,6 +215,12 @@ kubectl apply -f ./deployment-ms_usuarios.yaml
 kubectl scale deployment <<deployment_name>> --replicas=<<cantidad_replicas>>
 kubectl scale deployment ms-usuarios --replicas=3
 
+--Listar imagenes que cuenta minikube
+minikube image ls
+
+--Borrar imagen en minikube
+minikube image rm <<image_name>>
+
 --Para desplegar una imagen propio en minukube usar comando
 minikube image load <IMAGE_NAME>
 minikube image load mpobletemori/ms-usuarios:v1

@@ -25,7 +25,7 @@ spec:
       #es una lista donde se especifica los contenedores e images a usar
       containers:
       #identificador de imagen
-      - image: mpobletemori/ms-cursos:v1
+      - image: mpobletemori/ms-cursos:v1.2
         #nombre del pod a crear
         name: ms-cursos
         #detallar puertos a especificar

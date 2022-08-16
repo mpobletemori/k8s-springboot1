@@ -1,6 +1,7 @@
 package pe.mpobletemori.springcloud.ms.usuarios.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -90,6 +91,15 @@ public class UsuarioController {
     @GetMapping("/usuarios-por-curso")
     public ResponseEntity<?> obtenerAlumnoPorCurso(@RequestParam List<Long> ids){
             return ResponseEntity.ok(usuarioService.listarPorIds(ids));
+    }
+
+    @Autowired
+    private Environment env;
+
+    @GetMapping("/testk8s-envs")
+    public Map<String,String> testK8sEnvs(){
+        return Map.of("myPodName",env.getProperty("MY_POD_NAME", "pob1"),
+                      "myPodIP",env.getProperty("MY_POD_IP", "pobIP"));
     }
 
 }
