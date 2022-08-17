@@ -99,7 +99,8 @@ public class UsuarioController {
     @GetMapping("/testk8s-envs")
     public Map<String,String> testK8sEnvs(){
         return Map.of("myPodName",env.getProperty("MY_POD_NAME", "pob1"),
-                      "myPodIP",env.getProperty("MY_POD_IP", "pobIP"));
+                      "myPodIP",env.getProperty("MY_POD_IP", "pobIP"),
+                      "config.texto",env.getProperty("config.texto", "textoPob"));
     }
 
 }

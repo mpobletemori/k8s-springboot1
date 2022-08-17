@@ -9,6 +9,11 @@ data:
   db_username: "root"
   db_password: "sasa"
   cursos_url: "ms-cursos:8002"
+  #Inicio Agregar configuraciones de application.yaml
+  application.yaml: |-
+    config:
+      texto: Configurando ambiente por defecto
+  #Fin Agregar configuraciones de application.yaml
 
 ---
 apiVersion: v1
