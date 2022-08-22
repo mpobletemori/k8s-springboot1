@@ -9,10 +9,27 @@ data:
   db_username: "root"
   db_password: "sasa"
   cursos_url: "ms-cursos:8002"
+  #perfil a configurar en aplicacion
+  app_spring_profiles_active: prod
   #Inicio Agregar configuraciones de application.yaml
   application.yaml: |-
     config:
-      texto: Configurando ambiente por defecto
+      texto: "Configurando ambiente por defecto"
+    ---
+    spring:
+      config:
+        activate:
+          on-profile: dev
+    config:
+      texto: "Configurando ambiente de desarrollo"
+    
+    ---
+    spring:
+      config:
+        activate:
+          on-profile: prod
+    config:
+      texto: "Configurando ambiente de produccion"
   #Fin Agregar configuraciones de application.yaml
 
 ---

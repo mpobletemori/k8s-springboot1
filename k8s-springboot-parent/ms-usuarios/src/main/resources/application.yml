@@ -22,6 +22,9 @@ spring:
         #realizar autodescubrimiento para todos los namespace en kubernete (por defecto lo realiza en man
         all-namespaces: true
 
+  profiles:
+    active: ${APP_SPRING_PROFILES_ACTIVE:dev}
+
 server:
   port: ${PORT:8001}
 
