@@ -119,22 +119,31 @@ spec:
             configMapKeyRef:
               name: configmap-ms-usuarios
               key: app_spring_profiles_active
-        readinessProbe:
-          httpGet:
-            path: /actuator/health/readiness
-            port: 8001
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 20
-          timeoutSeconds: 10
+        ##Integracion con spring-boot actuator
+        #readinessProbe:
+          #httpGet:
+            #path: /actuator/health/readiness
+            #port: 8001
+            #scheme: HTTP
+          #initialDelaySeconds: 5
+          #periodSeconds: 20
+          #timeoutSeconds: 10
+        #livenessProbe:
+          #httpGet:
+            #path: /actuator/health/liveness
+            #port: 8001
+            #scheme: HTTP
+          #initialDelaySeconds: 10
+          #periodSeconds: 30
+          #timeoutSeconds: 10
 
-        livenessProbe:
-          httpGet:
-            path: /actuator/health/liveness
-            port: 8001
-            scheme: HTTP
-          initialDelaySeconds: 10
-          periodSeconds: 30
-          timeoutSeconds: 10
+        ##Especifica recursos asegurados para cada prod
+        #resources:
+          #requests:
+            #memory: "512Mi"
+            #cpu: "400m"
+          #limits:
+            #memory: "800Mi"
+            #cpu: "600m"
 
         imagePullPolicy: Always
