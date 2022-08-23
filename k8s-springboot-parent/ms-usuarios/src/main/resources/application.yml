@@ -36,3 +36,20 @@ logging:
 
 ms-cursos:
   url: ${CURSOS_URL:ms-cursos:8002}
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true

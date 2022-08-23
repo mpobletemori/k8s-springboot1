@@ -12,7 +12,7 @@ data:
   #perfil a configurar en aplicacion
   app_spring_profiles_active: prod
   #Inicio Agregar configuraciones de application.yaml
-  application.yaml: |-
+  application.yml: |-
     config:
       texto: "Configurando ambiente por defecto"
     ---
