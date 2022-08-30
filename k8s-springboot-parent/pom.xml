@@ -23,6 +23,7 @@
     <modules>
         <module>ms-usuarios</module>
         <module>ms-cursos</module>
+		<module>ms-apigateway</module>
     </modules>
 
 </project>
