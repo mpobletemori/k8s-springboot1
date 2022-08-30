@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ms-apigateway
+  name: ms-apigateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-apigateway
+  template:
+    metadata:
+      labels:
+        app: ms-apigateway
+    spec:
+      containers:
+      - image: mpobletemori/ms-apigateway:v1
+        name: ms-apigateway
+        ports:
+        - containerPort: 8090
+
+        imagePullPolicy: Always
