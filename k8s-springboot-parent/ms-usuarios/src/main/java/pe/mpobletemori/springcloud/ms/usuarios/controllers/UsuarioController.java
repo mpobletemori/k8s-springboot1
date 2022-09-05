@@ -103,4 +103,11 @@ public class UsuarioController {
                       "config.texto",env.getProperty("config.texto", "textoPob"));
     }
 
+
+    @GetMapping("/authorized")
+    public Map<String,Object> authorized(@RequestParam(name = "code ") String code){
+        Map<String,Object> mapResult = Map.of("code",code);
+        return mapResult;
+    }
+
 }
