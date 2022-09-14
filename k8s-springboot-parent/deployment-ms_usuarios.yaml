@@ -33,6 +33,17 @@ spec:
         #puerto interno del pod
         - containerPort: 8001
         env:
+        - name: LB_AUTH_ISSUER_URI
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: lb_auth_issuer_uri
+        - name : LB_USUARIOS_URI
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-ms-usuarios
+              key: lb_usuarios_uri
+
         #Inicio Variables de entorno de mismo kubernete
         - name: MY_POD_NAME
           valueFrom:
