@@ -275,7 +275,8 @@ kubectl expose deployment ms-cursos   --port=8002 --type=LoadBalancer
 -obtener url de servicio loadbalance
 minikube service ms-cursos     --url
 minikube service ms-apigateway --url
-minikube service ms-oauth --url
+minikube service ms-oauth      --url
+minikube service ms-usuarios   --url
 
 --Dar acceso a servicios por ip externa y puerto segun indica
 -- el comando kubectl get service
@@ -396,3 +397,28 @@ kubectl get secret
 --Habilitar autorizacion de administrador paa que los microservicios
 --Tengan a acceso al entorno de kubernete
 kubectl create clusterrolebinding admin --clusterrole=cluster-admin --serviceaccount=default:default
+
+
+http://localhost:8001/oauth2/authorization/ms-usuarios-client
+
+Registry addon with docker driver uses port 51575 please use that instead of default port 5000 
+
+https://minikube.sigs.k8s.io/docs/handbook/pushing/
+
+
+4. Pushing to an in-cluster using Registry addon
+For illustration purpose, we will assume that minikube VM has one of the ip from 192.168.39.0/24 subnet. If you have not overridden these subnets as per networking guide, you can find out default subnet being used by minikube for a specific OS and driver combination here which is subject to change. Replace 192.168.39.0/24 with appropriate values for your environment wherever applicable.
+
+Ensure that docker is configured to use 192.168.39.0/24 as insecure registry. Refer here for instructions.
+
+Ensure that 192.168.39.0/24 is enabled as insecure registry in minikube. Refer here for instructions..
+
+Enable minikube registry addon:
+
+minikube addons enable registry
+Build docker image and tag it appropriately:
+
+docker build --tag $(minikube ip):5000/test-img .
+Push docker image to minikube registry:
+
+docker push $(minikube ip):5000/test-img
