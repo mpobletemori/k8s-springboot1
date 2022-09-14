@@ -26,6 +26,9 @@ spring:
     active: ${APP_SPRING_PROFILES_ACTIVE:dev}
   security:
     oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:9000
       client:
         registration:
           ms-usuarios-client:
