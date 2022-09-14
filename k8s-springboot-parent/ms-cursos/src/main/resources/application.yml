@@ -37,4 +37,4 @@ server:
   port: ${PORT:8002}
 
 ms-usuarios:
-  url: ${USUARIOS_URL:ms-usuarios:8001}
+    url: ${USUARIOS_URL:ms-usuarios:8001}

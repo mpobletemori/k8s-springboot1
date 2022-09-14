@@ -120,6 +120,7 @@ docker volume ls
 docker build -t ms-usuarios:v1   . -f ./Dockerfile-generic --build-arg PORT_APP=8001 --build-arg MS_NAME=ms-usuarios   --build-arg JAR_NAME=ms-usuarios-0.0.1-SNAPSHOT.jar
 docker build -t ms-cursos:v1     . -f ./Dockerfile-generic --build-arg PORT_APP=8002 --build-arg MS_NAME=ms-cursos     --build-arg JAR_NAME=ms-cursos-0.0.1-SNAPSHOT.jar
 docker build -t ms-apigateway:v1 . -f ./Dockerfile-generic --build-arg PORT_APP=8090 --build-arg MS_NAME=ms-apigateway --build-arg JAR_NAME=ms-apigateway-0.0.1-SNAPSHOT.jar
+docker build -t ms-oauth:v1      . -f ./Dockerfile-generic --build-arg PORT_APP=9000 --build-arg MS_NAME=ms-oauth      --build-arg JAR_NAME=ms-oauth-0.0.1-SNAPSHOT.jar
 
 --USO DE VARIABLES DE ENTORNO PARA DESPLEGAR CONTENEDORES DOCKER
 docker run -p 8001:8001 --env-file ./.env_ms-usuarios -d  --rm  --name ms-usuarios --network vnet_spring ms-usuarios:v1
@@ -170,6 +171,7 @@ docker tag local-image:tagname new-repo:tagname
 docker tag ms-usuarios:v1      mpobletemori/ms-usuarios:v1
 docker tag ms-cursos:v1        mpobletemori/ms-cursos:v1
 docker tag ms-apigateway:v1    mpobletemori/ms-apigateway:v1
+docker tag ms-oauth:v1    mpobletemori/ms-oauth:v1
 -Subir imagenes a docker hub
 docker push new-repo:tagname
 docker push mpobletemori/ms-usuarios:v1
@@ -229,6 +231,7 @@ minikube image load <IMAGE_NAME>
 minikube image load mpobletemori/ms-usuarios:v1
 minikube image load mpobletemori/ms-cursos:v1
 minikube image load mpobletemori/ms-apigateway:v1
+minikube image load mpobletemori/ms-oauth:v1
 
 --borrar deployment
 kubectl delete deployment <<deployment_name>>
@@ -270,9 +273,15 @@ minikube service ms-usuarios --url
 
 kubectl expose deployment ms-cursos   --port=8002 --type=LoadBalancer
 -obtener url de servicio loadbalance
-minikube service ms-cursos --url
-
+minikube service ms-cursos     --url
 minikube service ms-apigateway --url
+minikube service ms-oauth --url
+
+--Dar acceso a servicios por ip externa y puerto segun indica
+-- el comando kubectl get service
+minikube tunnel
+
+	
 
 --obtener yaml de services
 kubectl get service <<service_name>> -o yaml > <<service_filename>>.yaml

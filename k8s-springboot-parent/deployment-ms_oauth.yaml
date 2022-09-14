@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ms-oauth
+  name: ms-oauth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-oauth
+  template:
+    metadata:
+      labels:
+        app: ms-oauth
+    spec:
+      containers:
+      - image: mpobletemori/ms-oauth:v1
+        name: ms-oauth
+        ports:
+        - containerPort: 9000
+        env:
+          - name: LB_USUARIOS_URI
+            valueFrom:
+              configMapKeyRef:
+                name: configmap-ms-usuarios
+                key: lb_usuarios_uri
+
+        imagePullPolicy: Always
