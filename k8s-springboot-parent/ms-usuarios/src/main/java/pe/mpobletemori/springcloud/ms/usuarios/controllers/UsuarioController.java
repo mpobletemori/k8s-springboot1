@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pe.mpobletemori.springcloud.ms.usuarios.models.entity.UsuarioEntity;
@@ -20,6 +21,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public List<UsuarioEntity> listar(){
@@ -45,6 +49,8 @@ public class UsuarioController {
                     .badRequest()
                     .body(Map.of("mensaje", "Ya existe un usuario con ese correo electronico!"));
         }
+
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardar(usuario));
     }
 
@@ -64,7 +70,7 @@ public class UsuarioController {
             }
             usuarioBD.setNombre(usuario.getNombre());
             usuarioBD.setEmail(usuario.getEmail());
-            usuarioBD.setPassword(usuario.getPassword());
+            usuarioBD.setPassword(passwordEncoder.encode(usuario.getPassword()));
             return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardar(usuarioBD));
         }
         return ResponseEntity.notFound().build();
