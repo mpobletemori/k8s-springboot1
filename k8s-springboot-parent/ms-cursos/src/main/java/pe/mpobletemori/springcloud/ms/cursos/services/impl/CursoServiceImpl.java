@@ -35,7 +35,7 @@ public class CursoServiceImpl implements CursoService {
     }
 
     @Override
-    public Optional<CursoEntity> buscarPorIdConUsuarios(Long id) {
+    public Optional<CursoEntity> buscarPorIdConUsuarios(Long id,String token) {
         Optional<CursoEntity> o = cursoRepository.findById(id);
 
         if(o.isPresent()){
@@ -44,7 +44,7 @@ public class CursoServiceImpl implements CursoService {
                 List<Long> ids = cursoEntity.getCursoUsuarios()
                         .stream().map(cu -> cu.getUsuarioId())
                         .collect(Collectors.toList());
-                List<UsuarioBeans> usuarioBeans = usuarioClientRest.obtenerAlumnoPorCurso(ids);
+                List<UsuarioBeans> usuarioBeans = usuarioClientRest.obtenerAlumnoPorCurso(ids,token);
                 cursoEntity.setUsuarios(usuarioBeans);
             }
             return Optional.of(cursoEntity);
@@ -72,11 +72,11 @@ public class CursoServiceImpl implements CursoService {
 
     @Transactional
     @Override
-    public Optional<UsuarioBeans> asignarUsuario(UsuarioBeans usuario, Long cursoId) {
+    public Optional<UsuarioBeans> asignarUsuario(UsuarioBeans usuario, Long cursoId,String token) {
         Optional<CursoEntity> o = cursoRepository.findById(cursoId);
         if(o.isPresent()){
             CursoEntity cursoEntity = o.get();
-            UsuarioBeans usuarioMS = usuarioClientRest.detalle(usuario.getId());
+            UsuarioBeans usuarioMS = usuarioClientRest.detalle(usuario.getId(),token);
             cursoEntity.addCursoUsuario(new CursoUsuarioEntity(usuarioMS.getId()));
             cursoRepository.save(cursoEntity);
             return Optional.of(usuario);
@@ -86,12 +86,12 @@ public class CursoServiceImpl implements CursoService {
 
     @Transactional
     @Override
-    public Optional<UsuarioBeans> crearUsuario(UsuarioBeans usuario, Long cursoId) {
+    public Optional<UsuarioBeans> crearUsuario(UsuarioBeans usuario, Long cursoId,String token) {
 
         Optional<CursoEntity> o = cursoRepository.findById(cursoId);
         if(o.isPresent()){
             CursoEntity cursoEntity = o.get();
-            UsuarioBeans usuarioNuevoMS = usuarioClientRest.crear(usuario);
+            UsuarioBeans usuarioNuevoMS = usuarioClientRest.crear(usuario,token);
             cursoEntity.addCursoUsuario(new CursoUsuarioEntity(usuarioNuevoMS.getId()));
             cursoRepository.save(cursoEntity);
             return Optional.of(usuario);
@@ -101,12 +101,12 @@ public class CursoServiceImpl implements CursoService {
 
     @Transactional
     @Override
-    public Optional<UsuarioBeans> eliminarUsuario(UsuarioBeans usuario, Long cursoId) {
+    public Optional<UsuarioBeans> eliminarUsuario(UsuarioBeans usuario, Long cursoId,String token) {
 
         Optional<CursoEntity> o = cursoRepository.findById(cursoId);
         if(o.isPresent()){
             CursoEntity cursoEntity = o.get();
-            UsuarioBeans usuarioMS = usuarioClientRest.detalle(usuario.getId());
+            UsuarioBeans usuarioMS = usuarioClientRest.detalle(usuario.getId(),token);
             cursoEntity.removeCursoUsuario(new CursoUsuarioEntity(usuarioMS.getId()));
             cursoRepository.save(cursoEntity);
             return Optional.of(usuario);

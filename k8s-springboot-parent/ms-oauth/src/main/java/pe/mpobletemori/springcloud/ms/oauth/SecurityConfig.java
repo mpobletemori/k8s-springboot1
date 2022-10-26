@@ -114,7 +114,9 @@ public class SecurityConfig {
                 .scope(OidcScopes.OPENID)
                 .scope("read")
                 .scope("write")
-                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                //.clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                //valor para que consentimiento sea automatico
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
                 .build();
 
         return new InMemoryRegisteredClientRepository(registeredClient);

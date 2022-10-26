@@ -12,12 +12,12 @@ import java.util.List;
 public interface UsuarioClientRest {
 
     @GetMapping("/{id}")
-    UsuarioBeans detalle(@PathVariable Long id);
+    UsuarioBeans detalle(@PathVariable Long id,@RequestHeader(value="Authorization",required = true) String token);
 
     @PostMapping("/")
-    UsuarioBeans crear(@RequestBody UsuarioBeans usuario);
+    UsuarioBeans crear(@RequestBody UsuarioBeans usuario,@RequestHeader(value="Authorization",required = true) String token);
 
     @GetMapping("/usuarios-por-curso")
-    List<UsuarioBeans> obtenerAlumnoPorCurso(@RequestParam Iterable<Long> ids);
+    List<UsuarioBeans> obtenerAlumnoPorCurso(@RequestParam Iterable<Long> ids,@RequestHeader(value="Authorization",required = true) String token);
 
 }

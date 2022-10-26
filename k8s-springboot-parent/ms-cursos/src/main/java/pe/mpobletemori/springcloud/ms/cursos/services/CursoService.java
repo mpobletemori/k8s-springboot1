@@ -9,13 +9,13 @@ import java.util.Optional;
 public interface CursoService {
     List<CursoEntity> listar();
     Optional<CursoEntity> buscarPorId(Long id);
-    Optional<CursoEntity> buscarPorIdConUsuarios(Long id);
+    Optional<CursoEntity> buscarPorIdConUsuarios(Long id,String token);
     CursoEntity guardar(CursoEntity cursoEntity);
     void eliminar(Long id);
     void eliminarCursoUsuarioPorId(Long id);
 
-    Optional<UsuarioBeans> asignarUsuario(UsuarioBeans usuario,Long cursoId);
-    Optional<UsuarioBeans> crearUsuario(UsuarioBeans usuario,Long cursoId);
-    Optional<UsuarioBeans> eliminarUsuario(UsuarioBeans usuario,Long cursoId);
+    Optional<UsuarioBeans> asignarUsuario(UsuarioBeans usuario,Long cursoId,String token);
+    Optional<UsuarioBeans> crearUsuario(UsuarioBeans usuario,Long cursoId,String token);
+    Optional<UsuarioBeans> eliminarUsuario(UsuarioBeans usuario,Long cursoId,String token);
 
 }

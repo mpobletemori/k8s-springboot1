@@ -28,8 +28,9 @@ public class CursoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?>  detalle(@PathVariable Long id){
-        Optional<CursoEntity> cursoEntityOptional = cursoService.buscarPorIdConUsuarios(id);
+    public ResponseEntity<?>  detalle(@PathVariable Long id,
+                                      @RequestHeader(value="Authorization",required = true) String token){
+        Optional<CursoEntity> cursoEntityOptional = cursoService.buscarPorIdConUsuarios(id,token);
         if (cursoEntityOptional.isPresent()){
             return ResponseEntity.ok(cursoEntityOptional.get());
         }
@@ -73,10 +74,12 @@ public class CursoController {
 
 
     @PutMapping("/asignar-usuario/{cursoId}")
-    public ResponseEntity<?> asignarUsuario(@RequestBody UsuarioBeans usuario,@PathVariable Long cursoId){
+    public ResponseEntity<?> asignarUsuario(@RequestBody UsuarioBeans usuario
+            ,@PathVariable Long cursoId
+            ,@RequestHeader(value="Authorization",required = true) String token){
         Optional<UsuarioBeans> o;
         try {
-            o = cursoService.asignarUsuario(usuario, cursoId);
+            o = cursoService.asignarUsuario(usuario, cursoId,token);
         }catch (FeignException e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("mensaje",
@@ -91,10 +94,12 @@ public class CursoController {
     }
 
     @PostMapping("/crear-usuario/{cursoId}")
-    public ResponseEntity<?> crearUsuario(@RequestBody UsuarioBeans usuario,@PathVariable Long cursoId){
+    public ResponseEntity<?> crearUsuario(@RequestBody UsuarioBeans usuario
+            ,@PathVariable Long cursoId
+            ,@RequestHeader(value="Authorization",required = true) String token){
         Optional<UsuarioBeans> o;
         try {
-            o = cursoService.crearUsuario(usuario, cursoId);
+            o = cursoService.crearUsuario(usuario, cursoId,token);
         }catch (FeignException e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("mensaje",
@@ -107,10 +112,12 @@ public class CursoController {
     }
 
     @DeleteMapping("/eliminar-usuario/{cursoId}")
-    public ResponseEntity<?> eliminarUsuario(@RequestBody UsuarioBeans usuario,@PathVariable Long cursoId){
+    public ResponseEntity<?> eliminarUsuario(@RequestBody UsuarioBeans usuario
+            ,@PathVariable Long cursoId
+            ,@RequestHeader(value="Authorization",required = true) String token){
         Optional<UsuarioBeans> o;
         try {
-            o = cursoService.eliminarUsuario(usuario, cursoId);
+            o = cursoService.eliminarUsuario(usuario, cursoId,token);
         }catch (FeignException e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("mensaje",

@@ -116,4 +116,13 @@ public class UsuarioController {
         return mapResult;
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<?> loginByEmail(@RequestParam(name="email") String email){
+        Optional<UsuarioEntity> o = this.usuarioService.buscarPorEmail(email);
+        if(o.isPresent()){
+            return ResponseEntity.ok(o.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }

@@ -22,7 +22,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests()
                 //Configurar resource Server
-                .antMatchers("/authorized").permitAll()
+                .antMatchers("/authorized","/login").permitAll()
                 //configurar acceso por scope
                 .antMatchers(HttpMethod.GET,"/","/{id}").hasAnyAuthority("SCOPE_read","SCOPE_write")
                 .antMatchers(HttpMethod.POST,"/").hasAuthority("SCOPE_write")
@@ -32,8 +32,8 @@ public class SecurityConfig {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .oauth2Login(oauth2Login->oauth2Login.loginPage("/oauth2/authorization/ms-usuarios-client"))
-                .oauth2Client(Customizer.withDefaults())
+                .oauth2Login(oauth2Login->oauth2Login.loginPage("/oauth2/authorization/ms-usuarios-client")).csrf().disable()
+                .oauth2Client(Customizer.withDefaults()).csrf().disable()
                 .oauth2ResourceServer().jwt();
 
         return http.build();
